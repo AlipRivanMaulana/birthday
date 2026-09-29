@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Birthday Messages</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#12080d;color:#fff5f0;font-family:Arial,sans-serif;padding:35px 5vw}
+.wrap{max-width:1000px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}h1{font:500 42px Georgia,serif}.muted{color:#bbaeb4}.actions a{color:#fff;text-decoration:none;border:1px solid #ffffff22;padding:10px 14px;border-radius:999px}
+.card{margin:14px 0;padding:20px;border:1px solid #ffffff1b;border-radius:18px;background:#ffffff08}.name{font:bold 18px Georgia,serif}.date{font-size:11px;color:#a99ca2}.text{margin:10px 0;line-height:1.7;color:#eee;white-space:pre-wrap;overflow-wrap:anywhere}.delete{border:1px solid #ff7fa844;background:transparent;color:#ff9fbd;border-radius:999px;padding:8px 12px;cursor:pointer}
+.empty{text-align:center;padding:60px 20px;border:1px dashed #ffffff22;border-radius:20px}
+</style></head><body><div class="wrap">
+<div class="top"><div><div class="muted">OWNER DASHBOARD</div><h1>Pesan untuk kamu ♡</h1></div><div class="actions"><a href="/">Lihat web</a> <a href="/admin/logout">Keluar</a></div></div>
+<p class="muted">Total pesan: {{ messages|length }}</p>
+{% if messages %}
+{% for m in messages %}
+<article class="card"><div class="name">{{ m.name }}</div><div class="date">{{ m.created_at }}</div><div class="text">{{ m.text }}</div>
+<form method="post" action="/admin/delete/{{ m.id }}" onsubmit="return confirm('Hapus pesan ini?')"><button class="delete">Hapus</button></form></article>
+{% endfor %}
+{% else %}<div class="empty">Belum ada pesan masuk 💌</div>{% endif %}
+</div></body></html>
